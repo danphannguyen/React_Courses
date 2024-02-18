@@ -1,12 +1,19 @@
 import "./App.css";
-import { Form } from "./components/Form";
+import { useCount }  from "./useCount";
+
 
 
 function App() {
 
+  const { count, increase, decrease, reset } = useCount(10);
+
   return (
     <div className="App">
-      <Form />
+      <h1>Counter</h1>
+      <h2>{count}</h2>
+      <button onClick={increase}>Increase</button>
+      <button onClick={decrease} >Decrease</button>
+      <button onClick={reset} >Reset</button>
     </div>
   );
 }
