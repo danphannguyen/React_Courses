@@ -4,18 +4,22 @@ import { Home } from "./pages/home";
 import { Profile } from "./pages/profile";
 import { Contact } from "./pages/contact";
 import { Navbar } from "./pages/navbar";
-import { useState, createContext } from "react";
+import { useState } from "react";
 
-export const AppContext = createContext();
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
 
 function App() {
 
+  const client = new QueryClient({ defaultOptions: 
+    { queries: { refetchOnWindowFocus: false } 
+  } });
   const [username, setUsername] = useState("Derlax");
 
   return (
     <div className="App">
 
-      <AppContext.Provider value={{username, setUsername}}>
+      <QueryClientProvider client={client}>
         <Router>
           <Navbar />
           <Routes>
@@ -25,7 +29,7 @@ function App() {
             <Route path="*" element={<h1>Not Found</h1>} />
           </Routes>
         </Router>
-      </AppContext.Provider>
+      </QueryClientProvider>
 
     </div>
   );
